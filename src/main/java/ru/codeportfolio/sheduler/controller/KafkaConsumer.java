@@ -2,23 +2,25 @@ package ru.codeportfolio.sheduler.controller;
 
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Controller;
-import ru.codeportfolio.emailsender.dto.EmailDto;
-import ru.codeportfolio.emailsender.service.EmailService;
+import ru.codeportfolio.sheduler.dto.ReportDto;
+import ru.codeportfolio.sheduler.service.ReportSendService;
 import tools.jackson.databind.ObjectMapper;
+
 
 @Controller
 public class KafkaConsumer {
-    private final EmailService emailService;
 
-    public KafkaConsumer(EmailService emailService) {
-        this.emailService = emailService;
+    private final ReportSendService reportSendService;
+
+    public KafkaConsumer(ReportSendService reportSendService) {
+        this.reportSendService = reportSendService;
     }
 
 
-    @KafkaListener(topics = "EMAIL_SENDING_TASKS")
+    @KafkaListener(topics = "SUMMARIZATION_SENDING")
     public void consume(String json){
         ObjectMapper mapper = new ObjectMapper();
-        EmailDto emailDto = mapper.readValue(json, EmailDto.class);
-        emailService.send(emailDto);
+        ReportDto reportDto = mapper.readValue(json, ReportDto.class);
+        reportSendService.send(reportDto);
     }
 }
