@@ -16,3 +16,6 @@ spring:
     show_sql: false
     hibernate:
       ddl-auto: validate
+
+kafka:
+  url: ${LOCALHOST:kafka}
