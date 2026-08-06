@@ -1,4 +1,4 @@
-package ru.codeportfolio.scheduler.service;
+package ru.codeportfolio.scheduler.service.mapper;
 
 import org.springframework.stereotype.Component;
 import ru.codeportfolio.scheduler.dao.UserRepository;
@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class TasksMapper {
+public class TasksMapperService {
     private final UserRepository userRepository;
 
-    public TasksMapper(UserRepository userRepository) {
+    public TasksMapperService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

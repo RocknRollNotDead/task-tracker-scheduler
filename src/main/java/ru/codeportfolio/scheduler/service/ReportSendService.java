@@ -3,28 +3,32 @@ package ru.codeportfolio.scheduler.service;
 import org.springframework.stereotype.Service;
 import ru.codeportfolio.scheduler.service.kafka.EmailKafkaSender;
 import ru.codeportfolio.scheduler.dto.ReportDto;
-import tools.jackson.databind.ObjectMapper;
+import ru.codeportfolio.scheduler.service.mapper.EmailMapperService;
 
 
 @Service
 public class ReportSendService {
 
+    private final static String HEADER = "Summary по вашим задачам от Task Ledger";
 
     private final EmailKafkaSender emailKafkaSender;
+    private final EmailMapperService emailMapperService;
 
-    public ReportSendService(EmailKafkaSender emailKafkaSender) {
+    public ReportSendService(EmailKafkaSender emailKafkaSender, EmailMapperService emailMapperService) {
         this.emailKafkaSender = emailKafkaSender;
+        this.emailMapperService = emailMapperService;
     }
 
 
     public void send(ReportDto reportDto) {
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        String request = objectMapper.writeValueAsString(reportDto);
-        emailKafkaSender.sendMail(request);
-
-
+        emailKafkaSender.sendMail(
+                emailMapperService.getEmailDto(reportDto, HEADER)
+        );
     }
+
+
+
 
 
 }
