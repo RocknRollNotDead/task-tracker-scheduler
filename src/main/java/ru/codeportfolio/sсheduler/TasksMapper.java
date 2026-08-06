@@ -1,11 +1,11 @@
-package ru.codeportfolio.sheduler;
+package ru.codeportfolio.sсheduler;
 
 import org.springframework.stereotype.Component;
-import ru.codeportfolio.sheduler.dao.UserRepository;
-import ru.codeportfolio.sheduler.dto.ReportRequestDto;
-import ru.codeportfolio.sheduler.dto.TaskDto;
-import ru.codeportfolio.sheduler.dto.UserDto;
-import ru.codeportfolio.sheduler.model.Task;
+import ru.codeportfolio.sсheduler.dao.UserRepository;
+import ru.codeportfolio.sсheduler.dto.ReportRequestDto;
+import ru.codeportfolio.sсheduler.dto.TaskDto;
+import ru.codeportfolio.sсheduler.dto.UserDto;
+import ru.codeportfolio.sсheduler.model.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;

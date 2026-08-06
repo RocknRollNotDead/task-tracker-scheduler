@@ -1,20 +1,12 @@
-package ru.codeportfolio.sheduler.service;
+package ru.codeportfolio.sсheduler.service;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import ru.codeportfolio.sheduler.TasksMapper;
-import ru.codeportfolio.sheduler.controller.EmailKafkaSender;
-import ru.codeportfolio.sheduler.controller.ReportRequestKafkaSender;
-import ru.codeportfolio.sheduler.dao.TaskRepository;
-import ru.codeportfolio.sheduler.dto.ReportDto;
-import ru.codeportfolio.sheduler.dto.ReportRequestDto;
-import ru.codeportfolio.sheduler.model.Status;
+import ru.codeportfolio.sсheduler.controller.EmailKafkaSender;
+import ru.codeportfolio.sсheduler.controller.ReportRequestKafkaSender;
+import ru.codeportfolio.sсheduler.dto.ReportDto;
+import ru.codeportfolio.sсheduler.dto.ReportRequestDto;
 import tools.jackson.databind.ObjectMapper;
-
-import java.sql.Timestamp;
-import java.time.Duration;
-import java.time.Instant;
 
 
 @Service

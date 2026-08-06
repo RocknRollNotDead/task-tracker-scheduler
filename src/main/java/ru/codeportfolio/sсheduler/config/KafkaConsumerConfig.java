@@ -1,4 +1,4 @@
-package ru.codeportfolio.sheduler.config;
+package ru.codeportfolio.sсheduler.config;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -38,7 +38,7 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, String> containerFactory(
+    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory(
             ConsumerFactory<String, String> consumerFactory
     ){
         var containerFactory = new ConcurrentKafkaListenerContainerFactory<String, String>();

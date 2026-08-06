@@ -18,4 +18,4 @@ spring:
       ddl-auto: validate
 
 kafka:
-  url: ${LOCALHOST:kafka}
+  url: ${LOCALHOST:kafka}:9092

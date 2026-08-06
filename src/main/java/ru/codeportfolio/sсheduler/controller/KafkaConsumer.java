@@ -1,9 +1,9 @@
-package ru.codeportfolio.sheduler.controller;
+package ru.codeportfolio.sсheduler.controller;
 
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Controller;
-import ru.codeportfolio.sheduler.dto.ReportDto;
-import ru.codeportfolio.sheduler.service.ReportSendService;
+import ru.codeportfolio.sсheduler.dto.ReportDto;
+import ru.codeportfolio.sсheduler.service.ReportSendService;
 import tools.jackson.databind.ObjectMapper;
 
 
@@ -17,7 +17,7 @@ public class KafkaConsumer {
     }
 
 
-    @KafkaListener(topics = "SUMMARIZATION_SENDING")
+    @KafkaListener(topics = "SUMMARIZATION_SENDING", groupId = "id")
     public void consume(String json){
         ObjectMapper mapper = new ObjectMapper();
         ReportDto reportDto = mapper.readValue(json, ReportDto.class);

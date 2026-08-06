@@ -1,4 +1,4 @@
-package ru.codeportfolio.sheduler.model;
+package ru.codeportfolio.sсheduler.model;
 
 
 public enum Role{

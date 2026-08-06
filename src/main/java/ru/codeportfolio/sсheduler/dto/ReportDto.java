@@ -1,4 +1,4 @@
-package ru.codeportfolio.sheduler.dto;
+package ru.codeportfolio.sсheduler.dto;
 
 public record ReportDto(
         Long userId,

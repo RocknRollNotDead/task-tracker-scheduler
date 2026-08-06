@@ -1,4 +1,4 @@
-package ru.codeportfolio.sheduler.config;
+package ru.codeportfolio.sсheduler.config;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;

@@ -1,4 +1,4 @@
-package ru.codeportfolio.sheduler.controller;
+package ru.codeportfolio.sсheduler.controller;
 
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Controller;

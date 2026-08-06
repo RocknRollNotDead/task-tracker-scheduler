@@ -1,11 +1,9 @@
-package ru.codeportfolio.sheduler.model;
+package ru.codeportfolio.sсheduler.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.time.Instant;
 
 @Getter
 @Entity
