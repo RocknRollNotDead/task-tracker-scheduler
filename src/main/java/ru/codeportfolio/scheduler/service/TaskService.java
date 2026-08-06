@@ -1,11 +1,11 @@
-package ru.codeportfolio.sсheduler.service;
+package ru.codeportfolio.scheduler.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.codeportfolio.sсheduler.TasksMapper;
-import ru.codeportfolio.sсheduler.dao.TaskRepository;
-import ru.codeportfolio.sсheduler.dto.ReportRequestDto;
-import ru.codeportfolio.sсheduler.model.Status;
+import ru.codeportfolio.scheduler.TasksMapper;
+import ru.codeportfolio.scheduler.dao.TaskRepository;
+import ru.codeportfolio.scheduler.dto.ReportRequestDto;
+import ru.codeportfolio.scheduler.model.Status;
 
 import java.sql.Timestamp;
 import java.time.Duration;

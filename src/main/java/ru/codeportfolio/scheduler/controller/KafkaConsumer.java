@@ -1,9 +1,9 @@
-package ru.codeportfolio.sсheduler.controller;
+package ru.codeportfolio.scheduler.controller;
 
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Controller;
-import ru.codeportfolio.sсheduler.dto.ReportDto;
-import ru.codeportfolio.sсheduler.service.ReportSendService;
+import ru.codeportfolio.scheduler.dto.ReportDto;
+import ru.codeportfolio.scheduler.service.ReportSendService;
 import tools.jackson.databind.ObjectMapper;
 
 

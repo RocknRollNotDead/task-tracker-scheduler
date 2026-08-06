@@ -1,4 +1,4 @@
-package ru.codeportfolio.sсheduler.config;
+package ru.codeportfolio.scheduler.config;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;

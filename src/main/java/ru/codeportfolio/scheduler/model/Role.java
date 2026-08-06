@@ -1,4 +1,4 @@
-package ru.codeportfolio.sсheduler.model;
+package ru.codeportfolio.scheduler.model;
 
 
 public enum Role{

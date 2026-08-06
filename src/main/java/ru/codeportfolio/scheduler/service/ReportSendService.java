@@ -1,11 +1,11 @@
-package ru.codeportfolio.sсheduler.service;
+package ru.codeportfolio.scheduler.service;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import ru.codeportfolio.sсheduler.controller.EmailKafkaSender;
-import ru.codeportfolio.sсheduler.controller.ReportRequestKafkaSender;
-import ru.codeportfolio.sсheduler.dto.ReportDto;
-import ru.codeportfolio.sсheduler.dto.ReportRequestDto;
+import ru.codeportfolio.scheduler.controller.EmailKafkaSender;
+import ru.codeportfolio.scheduler.controller.ReportRequestKafkaSender;
+import ru.codeportfolio.scheduler.dto.ReportDto;
+import ru.codeportfolio.scheduler.dto.ReportRequestDto;
 import tools.jackson.databind.ObjectMapper;
 
 

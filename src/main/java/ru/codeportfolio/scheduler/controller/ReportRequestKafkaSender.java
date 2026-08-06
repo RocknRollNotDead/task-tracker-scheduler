@@ -1,4 +1,4 @@
-package ru.codeportfolio.sсheduler.controller;
+package ru.codeportfolio.scheduler.controller;
 
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Controller;

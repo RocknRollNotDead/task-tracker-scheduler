@@ -1,4 +1,4 @@
-package ru.codeportfolio.sсheduler.model;
+package ru.codeportfolio.scheduler.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

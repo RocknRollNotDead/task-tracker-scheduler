@@ -1,4 +1,4 @@
-package ru.codeportfolio.sсheduler;
+package ru.codeportfolio.scheduler;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

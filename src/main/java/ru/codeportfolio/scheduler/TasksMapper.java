@@ -1,11 +1,11 @@
-package ru.codeportfolio.sсheduler;
+package ru.codeportfolio.scheduler;
 
 import org.springframework.stereotype.Component;
-import ru.codeportfolio.sсheduler.dao.UserRepository;
-import ru.codeportfolio.sсheduler.dto.ReportRequestDto;
-import ru.codeportfolio.sсheduler.dto.TaskDto;
-import ru.codeportfolio.sсheduler.dto.UserDto;
-import ru.codeportfolio.sсheduler.model.Task;
+import ru.codeportfolio.scheduler.dao.UserRepository;
+import ru.codeportfolio.scheduler.dto.ReportRequestDto;
+import ru.codeportfolio.scheduler.dto.TaskDto;
+import ru.codeportfolio.scheduler.dto.UserDto;
+import ru.codeportfolio.scheduler.model.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;

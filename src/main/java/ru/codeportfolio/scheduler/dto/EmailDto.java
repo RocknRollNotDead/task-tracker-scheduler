@@ -1,4 +1,4 @@
-package ru.codeportfolio.sсheduler.dto;
+package ru.codeportfolio.scheduler.dto;
 
 public record EmailDto (
         String email,
