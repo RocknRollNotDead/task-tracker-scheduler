@@ -1,5 +1,6 @@
 package ru.codeportfolio.scheduler.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Controller;
 import ru.codeportfolio.scheduler.dto.ReportDto;
@@ -17,8 +18,8 @@ public class KafkaConsumer {
     }
 
 
-    @KafkaListener(topics = "SUMMARIZATION_SENDING", groupId = "id")
-    public void consume(String json){
+    @KafkaListener(topics = "SUMMARIZATION_SENDING")
+    public void consume(String json) {
         ObjectMapper mapper = new ObjectMapper();
         ReportDto reportDto = mapper.readValue(json, ReportDto.class);
         reportSendService.send(reportDto);

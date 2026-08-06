@@ -2,7 +2,6 @@ package ru.codeportfolio.scheduler.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.codeportfolio.scheduler.TasksMapper;
 import ru.codeportfolio.scheduler.dao.TaskRepository;
 import ru.codeportfolio.scheduler.dto.ReportRequestDto;
 import ru.codeportfolio.scheduler.model.Status;

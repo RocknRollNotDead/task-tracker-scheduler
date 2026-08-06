@@ -18,29 +18,8 @@ public class User {
     @Column(nullable = false)
     private String username;
 
-    @Column(nullable = false)
-    private String password;
-
     @Column(unique = true, nullable = false)
     private String email;
-
-    @Column(nullable = false)
-    private Role role;
-
-    public User(String username, String password, Role role, String email) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.role = role;
-    }
-
-    public User(Long id, String username, String password, Role role, String email) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.role = role;
-        this.id = id;
-    }
 
     public User() {
 

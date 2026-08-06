@@ -17,9 +17,6 @@ public class Task {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private String text;
-
     @JoinColumn(nullable = false)
     @ManyToOne
     private User owner;
@@ -30,12 +27,6 @@ public class Task {
     @Column
     private Timestamp timestamp;
 
-    public Task(String name, String text, User owner) {
-        this.name = name;
-        this.text = text;
-        this.owner = owner;
-        this.status = Status.IN_PROGRESS;
-    }
 
     public Task() {
 

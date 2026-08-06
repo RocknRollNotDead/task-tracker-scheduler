@@ -1,4 +1,4 @@
-package ru.codeportfolio.scheduler;
+package ru.codeportfolio.scheduler.service;
 
 import org.springframework.stereotype.Component;
 import ru.codeportfolio.scheduler.dao.UserRepository;
@@ -21,7 +21,7 @@ public class TasksMapper {
     }
 
 
-    public ReportRequestDto createDtoFromTasks(List<Task> tasks, List<Task> notDoneTasks){
+    public ReportRequestDto createDtoFromTasks(List<Task> tasks, List<Task> notDoneTasks) {
         List<UserDto> userDtos = new ArrayList<>();
 
         Map<Long, List<TaskDto>> usersTask = new HashMap<>();
@@ -31,7 +31,7 @@ public class TasksMapper {
         putTasksInMap(notDoneTasks, usersTask);
 
 
-        usersTask.forEach( (id, value) -> {
+        usersTask.forEach((id, value) -> {
             userDtos.add(new UserDto(
                     id,
                     userRepository.findById(id).orElseThrow().getUsername(),
@@ -53,7 +53,7 @@ public class TasksMapper {
         }
     }
 
-    public TaskDto mapTask(Task task) {
+    private TaskDto mapTask(Task task) {
         return new TaskDto(task.getName(), task.getStatus());
     }
 

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import ru.codeportfolio.scheduler.model.Status;
 import ru.codeportfolio.scheduler.model.Task;
 
-
 import java.sql.Timestamp;
 import java.util.List;
 
