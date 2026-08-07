@@ -2,7 +2,6 @@ package ru.codeportfolio.scheduler.service;
 
 import org.springframework.stereotype.Service;
 import ru.codeportfolio.scheduler.service.kafka.EmailKafkaSender;
-import ru.codeportfolio.scheduler.dto.ReportDto;
 import ru.codeportfolio.scheduler.service.mapper.EmailMapperService;
 
 
@@ -20,15 +19,12 @@ public class ReportSendService {
     }
 
 
-    public void send(ReportDto reportDto) {
+    public void send(Long userId, String text) {
 
         emailKafkaSender.sendMail(
-                emailMapperService.getEmailDto(reportDto, HEADER)
+                emailMapperService.getEmailDto(userId, text, HEADER)
         );
     }
-
-
-
 
 
 }

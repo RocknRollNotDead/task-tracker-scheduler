@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.codeportfolio.scheduler.dao.UserRepository;
 import ru.codeportfolio.scheduler.dto.EmailDto;
-import ru.codeportfolio.scheduler.dto.ReportDto;
 
 @Transactional
 @Service
@@ -16,11 +15,11 @@ public class EmailMapperService {
         this.userRepository = userRepository;
     }
 
-    public EmailDto getEmailDto(ReportDto reportDto, String header) {
+    public EmailDto getEmailDto(Long userId, String text, String header) {
         return new EmailDto(
-                userRepository.findById(reportDto.userId()).orElseThrow().getEmail(),
+                userRepository.findById(userId).orElseThrow().getEmail(),
                 header,
-                reportDto.text()
+                text
         );
     }
 }

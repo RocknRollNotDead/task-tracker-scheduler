@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.Instant;
 
-@Transactional
+@Transactional(readOnly = true)
 @Service
 public class TaskService {
 
