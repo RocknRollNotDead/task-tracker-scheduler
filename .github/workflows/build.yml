@@ -21,3 +21,6 @@ jobs:
         run: |
           docker build -t appleapplenotdead/task-tracker-scheduler:${{ github.sha }} .
           docker push appleapplenotdead/task-tracker-scheduler:${{ github.sha }}
+          
+          docker tag appleapplenotdead/task-tracker-scheduler:${{ github.sha }} appleapplenotdead/task-tracker-scheduler:latest
+          docker push appleapplenotdead/task-tracker-scheduler:latest
