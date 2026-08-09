@@ -1,10 +1,12 @@
 package ru.codeportfolio.scheduler.service.kafka;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import ru.codeportfolio.scheduler.dto.ReportRequestDto;
 import tools.jackson.databind.ObjectMapper;
 
+@Slf4j
 @Service
 public class RequestReportKafkaSender {
 

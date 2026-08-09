@@ -1,10 +1,12 @@
 package ru.codeportfolio.scheduler.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import ru.codeportfolio.scheduler.dto.ReportRequestDto;
 import ru.codeportfolio.scheduler.service.kafka.RequestReportKafkaSender;
 
+@Slf4j
 @Service
 public class RequestReportSendService {
 
@@ -19,6 +21,7 @@ public class RequestReportSendService {
     @Scheduled(cron = "0 0 0 * * *")
     public void sendRequest() {
 
+        log.info("get reports");
         ReportRequestDto reportRequestDto = taskService.getDtoForReports();
 
         requestReportKafkaSender.sendRequest(reportRequestDto);
