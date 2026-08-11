@@ -32,4 +32,12 @@ public class Task {
 
     }
 
+    // только для теста
+    public Task(Long id, String name, User owner, Status status, Timestamp timestamp) {
+        this.id = id;
+        this.name = name;
+        this.owner = owner;
+        this.status = status;
+        this.timestamp = timestamp;
+    }
 }

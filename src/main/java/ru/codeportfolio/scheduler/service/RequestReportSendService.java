@@ -18,7 +18,7 @@ public class RequestReportSendService {
         this.taskService = taskService;
     }
 
-    @Scheduled(cron = "0 20 10 * * *", zone = "Europe/Moscow")
+    @Scheduled(cron = "0 26 20 * * *", zone = "Europe/Moscow")
     public void sendRequest() {
 
         log.info("get reports");

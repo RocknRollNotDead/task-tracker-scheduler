@@ -1,5 +1,6 @@
 package ru.codeportfolio.scheduler.service;
 
+import com.google.errorprone.annotations.DoNotMock;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.codeportfolio.scheduler.dao.TaskRepository;
@@ -30,4 +31,9 @@ public class TaskService {
         var notDoneTasks = taskRepository.getTasksByStatus(Status.IN_PROGRESS);
         return tasksMapperService.createDtoFromTasks(tasks, notDoneTasks);
     }
+
+
+
+
 }
+
