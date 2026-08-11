@@ -35,7 +35,7 @@ public class TasksMapperService {
             userDtos.add(new UserDto(
                     id,
                     userRepository.findById(id).orElseThrow().getUsername(),
-                    value
+                    value.toString()
             ));
         });
 
