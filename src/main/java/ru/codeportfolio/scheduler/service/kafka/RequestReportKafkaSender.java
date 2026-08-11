@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import ru.codeportfolio.scheduler.dto.ReportRequestDto;
 import tools.jackson.databind.ObjectMapper;
 
+import java.time.Instant;
+
 @Slf4j
 @Service
 public class RequestReportKafkaSender {
@@ -20,6 +22,12 @@ public class RequestReportKafkaSender {
 
     public void sendRequest(ReportRequestDto reportRequestDto) {
         String request = objectMapper.writeValueAsString(reportRequestDto);
-        kafkaTemplate.send("REPORT_REQUEST", request);
+        kafkaTemplate.send("REPORT_REQUEST", request)
+                .whenComplete((result, e) ->
+                {
+                    if (e != null) {
+                        log.error("Error to send to kafka request to report, time: {}", Instant.now());
+                    }
+                });
     }
 }

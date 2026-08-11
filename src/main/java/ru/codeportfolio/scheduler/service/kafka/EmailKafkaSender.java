@@ -18,8 +18,14 @@ public class EmailKafkaSender {
     }
 
     public void sendMail(EmailDto emailDto) {
-        log.info("send report to {}", emailDto.email());
+
         String request = objectMapper.writeValueAsString(emailDto);
-        kafkaTemplate.send("EMAIL_SENDING_TASKS", request);
+        kafkaTemplate.send("EMAIL_SENDING_TASKS", request)
+                .whenComplete((result, e) ->
+                {
+                    if (e != null) {
+                        log.error("Error to send to kafka mail report for address {}", emailDto.email());
+                    }
+                });
     }
 }
