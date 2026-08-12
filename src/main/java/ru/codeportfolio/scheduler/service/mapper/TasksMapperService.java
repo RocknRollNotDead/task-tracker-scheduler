@@ -6,6 +6,7 @@ import ru.codeportfolio.scheduler.dto.ReportRequestDto;
 import ru.codeportfolio.scheduler.dto.TaskDto;
 import ru.codeportfolio.scheduler.dto.UserDto;
 import ru.codeportfolio.scheduler.model.Task;
+import ru.codeportfolio.scheduler.service.UserService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,12 +15,13 @@ import java.util.Map;
 
 @Component
 public class TasksMapperService {
-    private final UserRepository userRepository;
 
-    public TasksMapperService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+
+    private final UserService userService;
+
+    public TasksMapperService(UserService userService) {
+        this.userService = userService;
     }
-
 
     public ReportRequestDto createDtoFromTasks(List<Task> tasks, List<Task> notDoneTasks) {
         List<UserDto> userDtos = new ArrayList<>();
@@ -34,7 +36,7 @@ public class TasksMapperService {
         usersTask.forEach((id, value) -> {
             userDtos.add(new UserDto(
                     id,
-                    userRepository.findById(id).orElseThrow().getUsername(),
+                    userService.getUsername(id),
                     value.toString()
             ));
         });
@@ -42,6 +44,8 @@ public class TasksMapperService {
         return new ReportRequestDto(userDtos);
 
     }
+
+
 
     private void putTasksInMap(List<Task> tasks, Map<Long, List<TaskDto>> usersTask) {
         for (Task task : tasks) {

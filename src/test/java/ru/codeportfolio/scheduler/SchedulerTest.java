@@ -3,7 +3,6 @@ package ru.codeportfolio.scheduler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -19,9 +18,9 @@ import ru.codeportfolio.scheduler.model.User;
 import ru.codeportfolio.scheduler.service.ReportSendService;
 import ru.codeportfolio.scheduler.service.RequestReportSendService;
 import ru.codeportfolio.scheduler.service.TaskService;
+import ru.codeportfolio.scheduler.service.UserService;
 import ru.codeportfolio.scheduler.service.kafka.EmailKafkaSender;
 import ru.codeportfolio.scheduler.service.kafka.RequestReportKafkaSender;
-import ru.codeportfolio.scheduler.service.mapper.EmailMapperService;
 import ru.codeportfolio.scheduler.service.mapper.TasksMapperService;
 import tools.jackson.databind.ObjectMapper;
 
@@ -92,7 +91,7 @@ public class SchedulerTest {
     @BeforeEach
     void initializeServices(){
         requestReportSendService = new RequestReportSendService(
-                requestReportKafkaSender, new TaskService(taskRepository, new TasksMapperService(userRepository)));
+                requestReportKafkaSender, new TaskService(taskRepository, new TasksMapperService(new UserService(userRepository))));
 
 
     }
@@ -130,7 +129,7 @@ public class SchedulerTest {
     void sendTaskTest(){
         var kafkaConsumer = new KafkaConsumer(new ReportSendService(
                 new EmailKafkaSender(kafkaTemplate, new ObjectMapper()),
-                new EmailMapperService(userRepository)
+                new UserService(userRepository)
         ));
 
         when(userRepository.findById(1L)).thenReturn(Optional.of(USER_1));
