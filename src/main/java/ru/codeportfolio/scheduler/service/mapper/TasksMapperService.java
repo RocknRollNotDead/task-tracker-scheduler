@@ -5,8 +5,10 @@ import ru.codeportfolio.scheduler.dao.UserRepository;
 import ru.codeportfolio.scheduler.dto.ReportRequestDto;
 import ru.codeportfolio.scheduler.dto.TaskDto;
 import ru.codeportfolio.scheduler.dto.UserDto;
+import ru.codeportfolio.scheduler.dto.UserMapDto;
 import ru.codeportfolio.scheduler.model.Task;
 import ru.codeportfolio.scheduler.service.UserService;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,44 +19,56 @@ import java.util.Map;
 public class TasksMapperService {
 
 
-    private final UserService userService;
+    private final ObjectMapper objectMapper;
 
-    public TasksMapperService(UserService userService) {
-        this.userService = userService;
+    public TasksMapperService(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
     }
 
-    public ReportRequestDto createDtoFromTasks(List<Task> tasks, List<Task> notDoneTasks) {
-        List<UserDto> userDtos = new ArrayList<>();
+    public ReportRequestDto createDtoFromTasks(List<Task> doneTasks, List<Task> notDoneTasks) {
 
-        Map<Long, List<TaskDto>> usersTask = new HashMap<>();
+        List<Task> tasks = new ArrayList<>();
 
-        putTasksInMap(tasks, usersTask);
+        tasks.addAll(doneTasks);
+        tasks.addAll(notDoneTasks);
 
-        putTasksInMap(notDoneTasks, usersTask);
-
-
-        usersTask.forEach((id, value) -> {
-            userDtos.add(new UserDto(
-                    id,
-                    userService.getUsername(id),
-                    value.toString()
-            ));
-        });
-
-        return new ReportRequestDto(userDtos);
-
-    }
+        Map<Long, UserMapDto> userDtoMap = new HashMap<>();
 
 
-
-    private void putTasksInMap(List<Task> tasks, Map<Long, List<TaskDto>> usersTask) {
         for (Task task : tasks) {
 
             Long userId = task.getOwner().getId();
+            List<TaskDto> tasksList;
 
-            usersTask.computeIfAbsent(userId, k -> new ArrayList<>()).add(mapTask(task));
 
+            if (!userDtoMap.containsKey(userId)){
+                tasksList = List.of(
+                                mapTask(task)
+                        );
+            } else {
+                tasksList = new ArrayList<>(userDtoMap.get(userId).tasks());
+                tasksList.add(mapTask(task));
+            }
+
+            userDtoMap.put(userId, new UserMapDto(
+                    userId,
+                    task.getOwner().getUsername(),
+                    tasksList));
         }
+
+        return new ReportRequestDto(
+                mapUserDto(new ArrayList<>(userDtoMap.values())));
+
+    }
+
+    private List<UserDto> mapUserDto(List<UserMapDto> userMapDtoList) {
+        return userMapDtoList.stream()
+                .map(userMapDto -> new UserDto(
+                        userMapDto.id(),
+                        userMapDto.name(),
+                        objectMapper.writeValueAsString(userMapDto.tasks())
+                ))
+                .toList();
     }
 
     private TaskDto mapTask(Task task) {

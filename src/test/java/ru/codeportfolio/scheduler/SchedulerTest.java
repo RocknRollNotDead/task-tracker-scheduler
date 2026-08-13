@@ -91,7 +91,10 @@ public class SchedulerTest {
     @BeforeEach
     void initializeServices(){
         requestReportSendService = new RequestReportSendService(
-                requestReportKafkaSender, new TaskService(taskRepository, new TasksMapperService(new UserService(userRepository))));
+                requestReportKafkaSender, new TaskService(
+                        taskRepository,
+                        new TasksMapperService(new ObjectMapper())
+        ));
 
 
     }
