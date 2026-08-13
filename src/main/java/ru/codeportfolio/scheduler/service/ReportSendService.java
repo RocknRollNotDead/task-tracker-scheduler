@@ -22,7 +22,7 @@ public class ReportSendService {
     public void send(Long userId, String text) {
 
         emailKafkaSender.sendMail(
-                new EmailDto(userService.getUserEmail(userId), text, HEADER)
+                new EmailDto(userService.getUserEmail(userId), HEADER, text)
         );
     }
 
