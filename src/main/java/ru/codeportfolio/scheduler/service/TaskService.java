@@ -1,6 +1,6 @@
 package ru.codeportfolio.scheduler.service;
 
-import com.google.errorprone.annotations.DoNotMock;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.codeportfolio.scheduler.dao.TaskRepository;
@@ -14,15 +14,11 @@ import java.time.Instant;
 
 @Transactional(readOnly = true)
 @Service
+@RequiredArgsConstructor
 public class TaskService {
 
     private final TaskRepository taskRepository;
     private final TasksMapperService tasksMapperService;
-
-    public TaskService(TaskRepository taskRepository, TasksMapperService tasksMapperService) {
-        this.taskRepository = taskRepository;
-        this.tasksMapperService = tasksMapperService;
-    }
 
     public ReportRequestDto getDtoForReports() {
         var tasks = taskRepository.getTasksByTimestampAfter(

@@ -1,13 +1,12 @@
 package ru.codeportfolio.scheduler.service.mapper;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.codeportfolio.scheduler.dao.UserRepository;
 import ru.codeportfolio.scheduler.dto.ReportRequestDto;
 import ru.codeportfolio.scheduler.dto.TaskDto;
 import ru.codeportfolio.scheduler.dto.UserDto;
 import ru.codeportfolio.scheduler.dto.UserMapDto;
 import ru.codeportfolio.scheduler.model.Task;
-import ru.codeportfolio.scheduler.service.UserService;
 import tools.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
@@ -16,14 +15,11 @@ import java.util.List;
 import java.util.Map;
 
 @Component
+@RequiredArgsConstructor
 public class TasksMapperService {
 
 
     private final ObjectMapper objectMapper;
-
-    public TasksMapperService(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
-    }
 
     public ReportRequestDto createDtoFromTasks(List<Task> doneTasks, List<Task> notDoneTasks) {
 

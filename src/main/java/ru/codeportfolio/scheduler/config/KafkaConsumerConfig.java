@@ -1,5 +1,6 @@
 package ru.codeportfolio.scheduler.config;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.LongDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -18,23 +19,18 @@ import java.util.Map;
 
 @EnableKafka
 @Configuration
+@RequiredArgsConstructor
 public class KafkaConsumerConfig {
 
-    public final String kafkaUrl;
-    @Value("${kafka.group-id}")
-    private String groupId;
-
-    public KafkaConsumerConfig(@Value("${kafka.url}") String kafkaUrl) {
-        this.kafkaUrl = kafkaUrl;
-    }
+    public final KafkaProperties kafkaProperties;
 
     @Bean
     public ConsumerFactory<Long, String> consumerFactory() {
         Map<String, Object> config = new HashMap<>();
-        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaUrl);
-        config.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.url());
+        config.put(ConsumerConfig.GROUP_ID_CONFIG, kafkaProperties.groupId());
         config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-        config.put(ConsumerConfig.CLIENT_ID_CONFIG, "scheduler-consumer");
+        config.put(ConsumerConfig.CLIENT_ID_CONFIG, kafkaProperties.consumerName());
 
         return new DefaultKafkaConsumerFactory<>(
                 config,

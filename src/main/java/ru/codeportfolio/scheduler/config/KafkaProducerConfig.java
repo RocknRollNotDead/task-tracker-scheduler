@@ -1,5 +1,6 @@
 package ru.codeportfolio.scheduler.config;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,22 +14,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
+@RequiredArgsConstructor
 public class KafkaProducerConfig {
 
-    public final String kafkaUrl;
-
-    public KafkaProducerConfig(@Value("${kafka.url}") String kafkaUrl) {
-        this.kafkaUrl = kafkaUrl;
-    }
+    public final KafkaProperties kafkaProperties;
 
     @Bean
     public ProducerFactory<String, String> producerFactory() {
         Map<String, Object> config = new HashMap<>();
-        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaUrl);
+        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.url());
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 
-        config.put(ProducerConfig.CLIENT_ID_CONFIG, "scheduler-producer");
+        config.put(ProducerConfig.CLIENT_ID_CONFIG, kafkaProperties.producerName());
 
         config.put(ProducerConfig.ACKS_CONFIG, "all");
         config.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);

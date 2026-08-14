@@ -1,5 +1,6 @@
 package ru.codeportfolio.scheduler.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
@@ -8,13 +9,10 @@ import ru.codeportfolio.scheduler.service.ReportSendService;
 
 
 @Controller
+@RequiredArgsConstructor
 public class KafkaConsumer {
 
     private final ReportSendService reportSendService;
-
-    public KafkaConsumer(ReportSendService reportSendService) {
-        this.reportSendService = reportSendService;
-    }
 
 
     @KafkaListener(topics = "SUMMARIZATION_SENDING")

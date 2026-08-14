@@ -20,3 +20,9 @@ spring:
 kafka:
   url: ${LOCALHOST:kafka}:9092
   group-id: scheduler-group
+  consumer-name: scheduler-consumer
+  producer-name: scheduler-producer
+
+schedule:
+  cron: 0 26 20 * * *
+  zone: Europe/Moscow
