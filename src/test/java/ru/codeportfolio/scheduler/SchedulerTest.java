@@ -107,22 +107,18 @@ public class SchedulerTest {
                 .thenReturn(List.of(TASK_3_DONE));
         when(taskRepository.getTasksByStatus(Status.IN_PROGRESS))
                 .thenReturn(List.of(TASK_1_IN_PROGRESS, TASK_2_IN_PROGRESS));
-        when(userRepository.findById(1L))
-                .thenReturn(Optional.of(USER_1));
-        when(userRepository.findById(2L))
-                .thenReturn(Optional.of(USER_2));
 
-
+        ObjectMapper objectMapper = new ObjectMapper();
         requestReportSendService.sendRequest();
 
         verify(requestReportKafkaSender).sendRequest(new ReportRequestDto(List.of(
-                new UserDto(1L, "username1", List.of(
+                new UserDto(1L, "username1", objectMapper.writeValueAsString(List.of(
                         new TaskDto(TASK_3_DONE.getName(), TASK_3_DONE.getStatus()),
                         new TaskDto(TASK_1_IN_PROGRESS.getName(), TASK_1_IN_PROGRESS.getStatus())
-                ).toString()),
-                new UserDto(2L, "username2", List.of(
+                ))),
+                new UserDto(2L, "username2", objectMapper.writeValueAsString(List.of(
                         new TaskDto(TASK_2_IN_PROGRESS.getName(), TASK_2_IN_PROGRESS.getStatus())
-                ).toString())
+                )))
         )));
     }
 
