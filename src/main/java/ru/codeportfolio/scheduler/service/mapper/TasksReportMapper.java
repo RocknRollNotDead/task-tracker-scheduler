@@ -13,44 +13,40 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 @Component
 @RequiredArgsConstructor
-public class TasksMapperService {
+public class TasksReportMapper {
 
 
     private final ObjectMapper objectMapper;
 
     public ReportRequestDto createDtoFromTasks(List<Task> doneTasks, List<Task> notDoneTasks) {
 
-        List<Task> tasks = new ArrayList<>();
-
-        tasks.addAll(doneTasks);
-        tasks.addAll(notDoneTasks);
-
         Map<Long, UserMapDto> userDtoMap = new HashMap<>();
 
+        Stream.concat(doneTasks.stream(), notDoneTasks.stream())
+                .forEach(task -> {
+                    Long userId = task.getOwner().getId();
+                    List<TaskDto> tasksList;
 
-        for (Task task : tasks) {
 
-            Long userId = task.getOwner().getId();
-            List<TaskDto> tasksList;
-
-
-            if (!userDtoMap.containsKey(userId)){
-                tasksList = List.of(
+                    if (!userDtoMap.containsKey(userId)){
+                        tasksList = List.of(
                                 mapTask(task)
                         );
-            } else {
-                tasksList = new ArrayList<>(userDtoMap.get(userId).tasks());
-                tasksList.add(mapTask(task));
-            }
+                    } else {
+                        tasksList = new ArrayList<>(userDtoMap.get(userId).tasks());
+                        tasksList.add(mapTask(task));
+                    }
 
-            userDtoMap.put(userId, new UserMapDto(
-                    userId,
-                    task.getOwner().getUsername(),
-                    tasksList));
-        }
+                    userDtoMap.put(userId, new UserMapDto(
+                            userId,
+                            task.getOwner().getUsername(),
+                            tasksList));
+
+                });
 
         return new ReportRequestDto(
                 mapUserDto(new ArrayList<>(userDtoMap.values())));

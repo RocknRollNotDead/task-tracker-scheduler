@@ -21,7 +21,7 @@ import ru.codeportfolio.scheduler.service.TaskService;
 import ru.codeportfolio.scheduler.service.UserService;
 import ru.codeportfolio.scheduler.service.kafka.EmailKafkaSender;
 import ru.codeportfolio.scheduler.service.kafka.RequestReportKafkaSender;
-import ru.codeportfolio.scheduler.service.mapper.TasksMapperService;
+import ru.codeportfolio.scheduler.service.mapper.TasksReportMapper;
 import tools.jackson.databind.ObjectMapper;
 
 import java.sql.Timestamp;
@@ -93,7 +93,7 @@ public class SchedulerTest {
         requestReportSendService = new RequestReportSendService(
                 requestReportKafkaSender, new TaskService(
                         taskRepository,
-                        new TasksMapperService(new ObjectMapper())
+                        new TasksReportMapper(new ObjectMapper())
         ));
 
 
